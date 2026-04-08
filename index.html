@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Zeyada&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{--pink:#D87093;--pink-light:#FFB6C1;--pink-pale:#FFF0F3;--brown:#5D4037;--brown-light:#7A5548;}
+body{font-family:'Noto Sans TC',sans-serif;background:linear-gradient(135deg,#FFF8F0 0%,#FAE5D3 100%);color:var(--brown);min-height:100vh;overflow-x:hidden;}
+.balls-bg{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:hidden;}
+.ball{position:absolute;width:36px;height:36px;border-radius:50%;background:radial-gradient(circle at 30% 30%,#FFE135,#FFC107);border:2px solid rgba(255,255,255,0.8);opacity:0.45;}
+.ball::before{content:'';position:absolute;top:20%;left:20%;width:8px;height:8px;background:white;border-radius:50%;opacity:0.6;}
+.ball-1{top:10%;animation:roll-r 14s linear infinite;}
+.ball-2{top:55%;animation:roll-l 17s linear infinite;animation-delay:-5s;}
+.ball-3{top:80%;animation:roll-r 20s linear infinite;animation-delay:-9s;}
+@keyframes roll-r{from{left:-50px;transform:rotate(0deg);}to{left:calc(100vw + 50px);transform:rotate(1080deg);}}
+@keyframes roll-l{from{right:-50px;transform:rotate(0deg);}to{right:calc(100vw + 50px);transform:rotate(-1080deg);}}
+.page{position:relative;z-index:1;max-width:860px;margin:0 auto;padding:20px 16px 80px;}
+.guide{position:fixed;bottom:24px;left:16px;z-index:200;display:flex;flex-direction:column;align-items:flex-start;gap:6px;}
+.bubble{background:white;border:2px solid var(--pink-light);border-radius:14px 14px 14px 4px;padding:8px 12px;font-size:0.78rem;color:var(--brown);max-width:175px;line-height:1.5;box-shadow:0 4px 14px rgba(216,112,147,0.2);opacity:0;transform:translateY(6px);transition:opacity 0.4s,transform 0.4s;}
+.bubble.show{opacity:1;transform:translateY(0);}
+.av-guide{width:72px;height:90px;animation:gf 3s ease-in-out infinite;filter:drop-shadow(0 4px 10px rgba(216,112,147,0.35));}
+@keyframes gf{0%,100%{transform:translateY(0);}50%{transform:translateY(-5px);}}
+.hero{background:rgba(255,255,255,0.88);border-radius:24px;border:2px dashed var(--pink-light);padding:32px;display:flex;align-items:center;gap:24px;margin-bottom:24px;flex-wrap:wrap;}
+.av-hero{width:105px;height:105px;flex-shrink:0;border-radius:50%;border:3px solid var(--pink);box-shadow:0 6px 20px rgba(216,112,147,0.3);overflow:hidden;animation:fl 3s ease-in-out infinite;background:#ffffff;}
+@keyframes fl{0%,100%{transform:translateY(0);}50%{transform:translateY(-6px);}}
+.av-hero img{width:100%;height:100%;object-fit:cover;object-position:top center;}
+.hero-info{flex:1;min-width:200px;}
+.hn{font-family:'Zeyada',cursive;font-size:2.8rem;color:var(--pink);line-height:1.1;margin-bottom:4px;}
+.hs{font-size:0.92rem;color:var(--brown-light);margin-bottom:12px;}
+.tags{display:flex;flex-wrap:wrap;gap:8px;}
+.tag{display:inline-block;padding:4px 12px;border-radius:20px;font-size:0.76rem;font-weight:500;}
+.tp{background:var(--pink-pale);color:var(--pink);border:1px solid var(--pink-light);}
+.tg{background:#E8F5E9;color:#2E7D32;border:1px solid #A5D6A7;}
+.tb{background:#E3F2FD;color:#1565C0;border:1px solid #90CAF9;}
+.cbar{display:flex;flex-wrap:wrap;gap:10px;background:rgba(255,255,255,0.7);border-radius:16px;padding:14px 18px;margin-bottom:24px;border:1px solid var(--pink-light);}
+.ci{display:flex;align-items:center;gap:6px;font-size:0.82rem;color:var(--brown-light);}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--pink);flex-shrink:0;}
+.sec{margin-bottom:8px;}
+.stitle{font-family:'Zeyada',cursive;font-size:2.1rem;color:var(--pink);margin-bottom:14px;display:flex;align-items:center;gap:10px;}
+.stitle::after{content:'';flex:1;height:2px;background:linear-gradient(to right,var(--pink-light),transparent);border-radius:2px;}
+.card{background:rgba(255,255,255,0.9);border-radius:16px;padding:18px 22px;position:relative;margin-bottom:12px;transition:transform 0.2s;border:2px solid transparent;}
+.card:hover{transform:translateY(-3px);}
+.card::before{content:'';position:absolute;top:-2px;left:-2px;right:-2px;bottom:-2px;background:linear-gradient(135deg,#D87093,#FFB6C1,#98FB98,#87CEEB);border-radius:18px;z-index:-1;opacity:0.7;}
+.ch{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:6px;margin-bottom:5px;}
+.cc{font-size:0.97rem;font-weight:500;color:var(--brown);}
+.cr{font-size:0.88rem;color:var(--pink);font-weight:500;}
+.cd{font-size:0.78rem;color:var(--brown-light);}
+.cdesc{font-size:0.82rem;color:var(--brown-light);line-height:1.6;margin-top:3px;}
+.dur{display:inline-block;font-size:0.72rem;background:var(--pink-pale);color:var(--pink);border-radius:10px;padding:2px 8px;margin-left:7px;}
+.sg{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:11px;margin-bottom:24px;}
+.sk{background:rgba(255,255,255,0.9);border-radius:14px;padding:14px;text-align:center;border:1.5px solid var(--pink-light);transition:transform 0.2s;}
+.sk:hover{transform:scale(1.04);}
+.sk a{text-decoration:none;color:inherit;display:block;}
+.si{font-size:1.4rem;margin-bottom:5px;}
+.sn{font-size:0.8rem;color:var(--brown);font-weight:500;}
+.sn-link{font-size:0.8rem;color:var(--pink);font-weight:500;text-decoration:underline;}
+.ec{background:linear-gradient(135deg,rgba(255,255,255,0.9),rgba(232,245,233,0.8));border-radius:16px;padding:18px 22px;margin-bottom:12px;border:1.5px solid #A5D6A7;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;}
+.es{font-size:0.97rem;font-weight:500;color:#2E7D32;}
+.ed{font-size:0.82rem;color:var(--brown-light);margin-top:2px;}
+.ey{font-size:0.78rem;color:var(--brown-light);}
+/* 作品集 */
+.portfolio-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px;margin-bottom:24px;}
+.portfolio-item{background:rgba(255,255,255,0.9);border-radius:16px;overflow:hidden;border:1.5px solid var(--pink-light);transition:transform 0.2s;}
+.portfolio-item:hover{transform:translateY(-3px);}
+.portfolio-media{width:100%;height:160px;object-fit:cover;display:block;background:#f9f0f3;}
+.portfolio-media-video{width:100%;height:160px;display:block;object-fit:cover;}
+.portfolio-info{padding:12px 14px;}
+.portfolio-title{font-size:0.88rem;font-weight:500;color:var(--brown);margin-bottom:4px;}
+.portfolio-desc{font-size:0.76rem;color:var(--brown-light);line-height:1.5;}
+.portfolio-upload{border:2px dashed var(--pink-light);border-radius:16px;padding:32px;text-align:center;color:var(--brown-light);font-size:0.85rem;cursor:pointer;background:rgba(255,255,255,0.6);transition:background 0.2s;}
+.portfolio-upload:hover{background:rgba(255,240,243,0.8);}
+.upload-icon{font-size:2rem;margin-bottom:8px;}
+.footer{text-align:center;padding:22px 0 6px;color:var(--brown-light);font-size:0.8rem;border-top:2px dashed var(--pink-light);margin-top:10px;}
+.ft{font-family:'Zeyada',cursive;font-size:1.5rem;color:var(--pink);margin-bottom:3px;}
+.top-btn{position:fixed;bottom:28px;right:16px;width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--pink),var(--pink-light));border:none;color:white;font-size:1.1rem;cursor:pointer;z-index:100;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(216,112,147,0.4);}
+#fileInput{display:none;}
+
+/* 比賽紀錄 */
+.comp-card{background:rgba(255,255,255,0.9);border-radius:16px;padding:16px 20px;margin-bottom:12px;border:1.5px solid #FFB6C1;transition:transform 0.2s;}
+.comp-card:hover{transform:translateY(-2px);}
+.comp-main{display:flex;align-items:flex-start;gap:14px;}
+.comp-trophy{font-size:2rem;flex-shrink:0;line-height:1;}
+.comp-info{flex:1;}
+.comp-title{font-size:0.97rem;font-weight:500;color:#5D4037;margin-bottom:3px;}
+.comp-meta{font-size:0.78rem;color:#7A5548;margin-bottom:4px;}
+.comp-result{display:inline-block;font-size:0.76rem;background:#FFF0F3;color:#D87093;border:1px solid #FFB6C1;border-radius:20px;padding:2px 10px;}
+.comp-desc{font-size:0.8rem;color:#7A5548;line-height:1.5;margin-top:5px;}
+.comp-photos{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;}
+.comp-photo{width:80px;height:60px;object-fit:cover;border-radius:8px;border:1.5px solid #FFB6C1;cursor:pointer;}
+.comp-actions{display:flex;gap:6px;flex-shrink:0;}
+.comp-edit-btn{background:#FFF0F3;color:#D87093;border:1px solid #FFB6C1;border-radius:8px;padding:4px 10px;font-size:0.75rem;cursor:pointer;}
+.comp-del-btn{background:#fff;color:#e57373;border:1px solid #ffcdd2;border-radius:8px;padding:4px 8px;font-size:0.75rem;cursor:pointer;}
+.comp-add-btn{display:block;width:100%;padding:12px;border-radius:12px;border:2px dashed #FFB6C1;background:rgba(255,240,243,0.5);color:#D87093;font-size:0.88rem;cursor:pointer;text-align:center;margin-top:4px;margin-bottom:20px;font-family:inherit;}
+.comp-add-btn:hover{background:rgba(255,240,243,0.9);}
+/* lightbox */
+#lightbox{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);z-index:999;align-items:center;justify-content:center;}
+#lightbox img{max-width:90%;max-height:90%;border-radius:12px;}
+</style>
+</head>
+<body>
+<div class="balls-bg"><div class="ball ball-1"></div><div class="ball ball-2"></div><div class="ball ball-3"></div></div>
+
+<div class="guide" id="guide">
+  <div class="bubble" id="bubble">嗨！我是詹宜真，歡迎來看我的履歷！🎾</div>
+  <svg class="av-guide" viewBox="0 0 120 160" xmlns="http://www.w3.org/2000/svg">
+    <line x1="40" y1="88" x2="26" y2="112" stroke="#FDBCB4" stroke-width="7" stroke-linecap="round"/>
+    <circle cx="24" cy="116" r="6" fill="#FDBCB4"/>
+    <line x1="80" y1="88" x2="94" y2="112" stroke="#FDBCB4" stroke-width="7" stroke-linecap="round"/>
+    <circle cx="96" cy="116" r="6" fill="#FDBCB4"/>
+    <rect x="38" y="78" width="44" height="48" rx="10" fill="#D87093"/>
+    <rect x="38" y="90" width="44" height="5" rx="2" fill="#FFB6C1" opacity="0.5"/>
+    <line x1="53" y1="124" x2="46" y2="148" stroke="#5D4037" stroke-width="7" stroke-linecap="round"/>
+    <ellipse cx="43" cy="151" rx="9" ry="5" fill="#5D4037" transform="rotate(-10,43,151)"/>
+    <line x1="67" y1="124" x2="74" y2="148" stroke="#5D4037" stroke-width="7" stroke-linecap="round"/>
+    <ellipse cx="77" cy="151" rx="9" ry="5" fill="#5D4037" transform="rotate(10,77,151)"/>
+    <rect x="52" y="64" width="16" height="16" rx="4" fill="#FDBCB4"/>
+    <path d="M29 46 Q29 16 60 14 Q91 16 91 46 Q91 68 82 72 Q76 76 72 75 Q68 73 60 73 Q52 73 48 75 Q44 76 38 72 Q29 68 29 46Z" fill="#3A2A1A"/>
+    <path d="M29 46 Q27 58 31 67 Q34 73 39 72 Q33 63 33 50Z" fill="#3A2A1A"/>
+    <path d="M91 46 Q93 58 89 67 Q86 73 81 72 Q87 63 87 50Z" fill="#3A2A1A"/>
+    <circle cx="60" cy="48" r="29" fill="#FDBCB4"/>
+    <path d="M31 40 Q36 20 60 17 Q84 20 89 40 Q78 30 68 34 Q60 28 52 34 Q42 28 31 40Z" fill="#3A2A1A"/>
+    <ellipse cx="43" cy="54" rx="7" ry="5" fill="#FFB6C1" opacity="0.5"/>
+    <ellipse cx="77" cy="54" rx="7" ry="5" fill="#FFB6C1" opacity="0.5"/>
+    <ellipse cx="51" cy="49" rx="7" ry="7.5" fill="white"/>
+    <ellipse cx="69" cy="49" rx="7" ry="7.5" fill="white"/>
+    <circle cx="52" cy="50" r="4.5" fill="#3A2A1A"/>
+    <circle cx="70" cy="50" r="4.5" fill="#3A2A1A"/>
+    <circle cx="53.5" cy="48" r="1.5" fill="white"/>
+    <circle cx="71.5" cy="48" r="1.5" fill="white"/>
+    <rect x="40" y="42" width="18" height="14" rx="4" fill="none" stroke="#1A1A1A" stroke-width="2.8"/>
+    <rect x="62" y="42" width="18" height="14" rx="4" fill="none" stroke="#1A1A1A" stroke-width="2.8"/>
+    <line x1="58" y1="49" x2="62" y2="49" stroke="#1A1A1A" stroke-width="2.8" stroke-linecap="round"/>
+    <line x1="40" y1="49" x2="33" y2="51" stroke="#1A1A1A" stroke-width="2.2" stroke-linecap="round"/>
+    <line x1="80" y1="49" x2="87" y2="51" stroke="#1A1A1A" stroke-width="2.2" stroke-linecap="round"/>
+    <ellipse cx="60" cy="57" rx="2.5" ry="1.5" fill="#F0A090" opacity="0.6"/>
+    <path d="M52 63 Q60 70 68 63" fill="none" stroke="#D87093" stroke-width="2.2" stroke-linecap="round"/>
+    <circle cx="31" cy="53" r="3" fill="#D87093"/>
+    <circle cx="89" cy="53" r="3" fill="#D87093"/>
+  </svg>
+</div>
+
+<div class="page">
+  <div class="hero" data-sec="hero">
+    <div class="av-hero"><img id="heroImg" src="" alt="詹宜真"></div>
+    <div class="hero-info">
+      <div class="hn">詹宜真</div>
+      <div class="hs"> </div>
+      <div class="tags">
+        <span class="tag tg">✅ 求職中</span>
+        <span class="tag tb">📍 台中市</span>
+        <span class="tag tp">11~12年工作歷程</span>
+      </div>
+    </div>
+  </div>
+  <div class="cbar" data-sec="contact">
+    <div class="ci"><div class="dot"></div>0932-673-210</div>
+    <div class="ci"><div class="dot"></div>jenny806102000@yahoo.com.tw</div>
+    <div class="ci"><div class="dot"></div>台中市石岡區</div>
+    <div class="ci"><div class="dot"></div>女 · 34歲</div>
+  </div>
+  <div class="sec" data-sec="work">
+    <div class="stitle">工作經歷</div>
+    <div class="card"><div class="ch"><div><div class="cc">正崴精密工業股份有限公司</div><div class="cr">作業員<span class="dur">4年1個月</span></div></div><div class="cd">2021/4 – 2025/4</div></div><div class="cdesc">作業員/包裝員 · 台中市沙鹿區 · 電子零組件相關業（500人以上）</div></div>
+    <div class="card"><div class="ch"><div><div class="cc">富邦媒體科技（富邦momo）</div><div class="cr">倉儲人員<span class="dur">2個月</span></div></div><div class="cd">2021/3 – 2021/4</div></div><div class="cdesc">倉管/物料管理人員 · 500人以上</div></div>
+    <div class="card"><div class="ch"><div><div class="cc">吉嘉電子</div><div class="cr">組裝人員<span class="dur">6年5個月</span></div></div><div class="cd">2014/11 – 2021/3</div></div><div class="cdesc">作業員/組裝員 · 台中市潭子區 · 100~500人</div></div>
+    <div class="card"><div class="ch"><div><div class="cc">韋翰（石材製品製造業）</div><div class="cr">繪圖助理<span class="dur">4個月</span></div></div><div class="cd">2014/7 – 2014/10</div></div><div class="cdesc">行政助理 · 台中市神岡區</div></div>
+    <div class="card"><div class="ch"><div><div class="cc">PChome（倉儲業）</div><div class="cr">實習生<span class="dur">1年1個月</span></div></div><div class="cd">2012/7 – 2013/7</div></div><div class="cdesc">庫儲物流人員 · 桃園市八德區</div></div>
+  </div>
+  <div class="sec" data-sec="skills">
+    <div class="stitle">技能專長</div>
+    <div class="sg">
+      <div class="sk"><div class="si">🖥️</div><div class="sn">3D Max</div></div>
+      <div class="sk"><div class="si">🌐</div><div class="sn">球敘小編</div></div>
+      <div class="sk" style="cursor:pointer;" onclick="window.open('https://pickleball.pack8ai.com/')">
+        <div class="si">🎾</div><div class="sn-link">匹克球網站 ↗</div>
+      </div>
+      <div class="sk" style="cursor:pointer;" onclick="window.open('https://pack8ai.com/')">
+        <div class="si">📦</div><div class="sn-link">收納網站設計 ↗</div>
+      </div>
+    </div>
+  </div>
+  <div class="sec" data-sec="edu">
+    <div class="stitle">學歷</div>
+    <div class="ec"><div><div class="es">國立勤益科技大學</div><div class="ed">流通管理系 · 大學畢業</div></div><div class="ey">2009/6 – 2013/7</div></div>
+  </div>
+
+  <div class="sec" data-sec="portfolio">
+    <div class="stitle">球敘作品集</div>
+  <div class="portfolio-grid" id="portfolioGrid">
+      
+      <div class="portfolio-item">
+        <img class="portfolio-media" src="https://lh3.googleusercontent.com/d/1Tp8SOEMEsaYjlpeK4HoCEAqfO4WbAvc5" alt="作品1">
+        <div class="portfolio-info"><div class="portfolio-title">球敘側拍</div></div>
+      </div>
+
+      <div class="portfolio-item">
+        <img class="portfolio-media" src="https://lh3.googleusercontent.com/d/17F2YuyrCk_-szF3lcur-E1Eb1ykKOOCF" alt="作品2">
+        <div class="portfolio-info"><div class="portfolio-title">球敘側拍</div></div>
+      </div>
+
+      <div class="portfolio-item">
+        <img class="portfolio-media" src="https://lh3.googleusercontent.com/d/1hCqdOI1T7iMPUdLN_m8pHJMwBo_7e0dk" alt="作品3">
+        <div class="portfolio-info"><div class="portfolio-title">球敘側拍</div></div>
+      </div>
+
+      <div class="portfolio-item">
+        <img class="portfolio-media" src="https://lh3.googleusercontent.com/d/1rlXhNH_zNd_bWP9O8Q7U8cpiLww-0eHO" alt="作品4">
+        <div class="portfolio-info"><div class="portfolio-title">球敘側拍</div></div>
+      </div>
+
+      <div class="portfolio-item">
+        <img class="portfolio-media" src="https://lh3.googleusercontent.com/d/14eXfrhIMPavrl9PG256jO0kDM4VCX1Ct" alt="作品5">
+        <div class="portfolio-info"><div class="portfolio-title">教學紀錄</div></div>
+      </div>
+
+      <div class="portfolio-item">
+  <div class="portfolio-media-container" style="position: relative; width: 100%; height: 180px; overflow: hidden;">
+    <iframe 
+      src="https://drive.google.com/file/d/1euDej1VQ5ujDgafLITKLFOAIh_x-o-lu/preview" 
+      width="100%" 
+      height="180" 
+      frameborder="0" 
+      allow="autoplay" 
+      style="border: none;">
+    </iframe>
+  </div>
+  <div class="portfolio-info">
+    <div class="portfolio-title">教學影片</div>
+    <div class="portfolio-desc">點擊上方即可直接播放</div>
+  </div>
+</div>
+    </div>
+
+
+ <div class="sec" data-sec="competition">
+    <div class="stitle">比賽紀錄</div>
+    <div class="portfolio-grid" id="compList">
+      
+      <div class="portfolio-item">
+        <img class="portfolio-media" src="https://lh3.googleusercontent.com/d/1d4pxmROtqYuwmT3UbNSHcPo5_9Idc4l6" alt="比賽紀錄 1">
+        <div class="portfolio-info">
+          <div class="portfolio-title">新竹115年度主委盃 社會組2.5團體賽殿軍</div>
+          <div class="portfolio-desc">團隊合作與挑戰</div>
+        </div>
+      </div>
+
+      <div class="portfolio-item">
+        <img class="portfolio-media" src="https://lh3.googleusercontent.com/d/1XKsyYWU-uPZcAuTBbqN5AZCKaEslgAIz" alt="比賽紀錄 2">
+        <div class="portfolio-info">
+          <div class="portfolio-title">114年度港都盃2.0單打 第四名</div>
+          <div class="portfolio-desc">個人體能考驗</div>
+        </div>
+      </div>
+
+      <div class="portfolio-item">
+        <img class="portfolio-media" src="https://lh3.googleusercontent.com/d/107b7zY9FGlok2QnrdqvxoHzAEM4RvIuT" alt="比賽紀錄 3">
+        <div class="portfolio-info">
+          <div class="portfolio-title">2026 嗨賴（HighLight）盃匹克球開幕賽 女雙冠軍</div>
+          <div class="portfolio-desc">賽後榮耀與記錄</div>
+        </div>
+      </div>
+
+      
+    </div>
+  </div>
+
+
+<div style="max-width: 800px; margin: 60px auto; padding: 50px 40px; background: white; border-radius: 30px; border: 2px solid var(--pink-light); box-shadow: 0 15px 40px rgba(216, 112, 147, 0.15); position: relative; background-image: linear-gradient(var(--pink-pale) 1px, transparent 1px); background-size: 100% 2rem;">
+  
+  <div style="position: absolute; top: 10px; right: 20px; font-size: 8rem; color: var(--pink-pale); font-family: 'Zeyada', cursive; opacity: 0.8; z-index: 0;">"</div>
+  
+  <div style="position: relative; z-index: 1;">
+    
+    <h2 style="font-family: 'Zeyada', cursive; font-size: 3.2rem; color: var(--pink); margin-bottom: 30px; text-align: center; letter-spacing: 2px;">
+      熱愛，是最好的工作動力
+    </h2>
+    
+    <div style="font-family: 'Noto Sans TC', sans-serif; font-size: 1.05rem; line-height: 2; color: var(--brown); text-align: justify; padding: 0 10px;">
+      
+      <p style="margin-bottom: 25px;">
+        我記得第一次接觸匹克球時，看到場上不同年紀的人打成一片，那種發自內心的笑聲非常療癒。從那刻起我就在想：如果我的工作，能讓這份快樂延續下去，甚至讓更多人感受到這份溫度，那該有多好？
+      </p>
+      
+      <p style="margin-bottom: 25px;">
+        所以能夠將工作與興趣結合，是一件極其奢侈且幸福的事。對我而言，我希望如果有機會來這裡上班，不會是單純的任務交付，而是<strong style="color: var(--pink); font-weight: 700; background: linear-gradient(transparent 60%, var(--pink-light) 40%);">「經營一份熱愛」</strong>，並且將這份熱愛也交到跟我一樣同樣熱愛的人身上。
+      </p>
+      
+    </div>
+    
+    <div style="margin-top: 40px; text-align: right; font-family: 'Zeyada', cursive; font-size: 2.2rem; color: var(--pink); padding-right: 20px;">
+      With Passion, <span style="font-family: 'Noto Sans TC', sans-serif; font-size: 1.2rem; color: var(--pink); font-weight: 500;">♥</span> <span style="font-size: 1.5rem;"></span>
+    </div>
+    
+  </div>
+</div>
+
+  <div class="footer"><div class="ft">詹宜真的熱血履歷</div><p>用熱情書寫每一個工作瞬間 🎾</p></div>
+</div>
+<button class="top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+<script>
+document.getElementById('heroImg').src='data:image/png;base64,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';
+const msgs={hero:'嗨！我是詹宜真，歡迎來看我的履歷！🎾',contact:'想聯絡我嗎？這裡都找得到我喔！📞',work:'這是我一路走來的工作歷程，很豐富吧？💪',skills:'這些技能都是我一點一滴學來的！✨',edu:'認真念書的青春歲月...懷念啊！📚',portfolio:'這裡是我的作品集，歡迎欣賞！🎨',competition:'我的比賽戰績都在這裡！🏆'};
+const bubble=document.getElementById('bubble');let cur='';
+function show(m){bubble.classList.remove('show');setTimeout(()=>{bubble.textContent=m;bubble.classList.add('show');},200);}
+show(msgs.hero);
+const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){const s=x.target.getAttribute('data-sec');if(s&&s!==cur){cur=s;show(msgs[s]);}}});},{threshold:0.3});
+document.querySelectorAll('[data-sec]').forEach(el=>obs.observe(el));
+
+// 作品集上傳
+const fileInput=document.getElementById('fileInput');
+const grid=document.getElementById('portfolioGrid');
+fileInput.addEventListener('change',function(){
+  Array.from(this.files).forEach(file=>{
+    const reader=new FileReader();
+    reader.onload=function(e){
+      const item=document.createElement('div');
+      item.className='portfolio-item';
+      const isVideo=file.type.startsWith('video/');
+      const name=file.name.replace(/\.[^/.]+$/,'');
+      if(isVideo){
+        item.innerHTML='<video class="portfolio-media-video" src="'+e.target.result+'" controls></video><div class="portfolio-info"><div class="portfolio-title">'+name+'</div><div class="portfolio-desc">影片作品</div></div>';
+      }else{
+        item.innerHTML='<img class="portfolio-media" src="'+e.target.result+'" alt="'+name+'"><div class="portfolio-info"><div class="portfolio-title">'+name+'</div><div class="portfolio-desc">攝影作品</div></div>';
+      }
+      grid.insertBefore(item,grid.lastElementChild);
+    };
+    reader.readAsDataURL(file);
+  });
+  this.value='';
+});
+
+// 比賽紀錄
+let competitions=[];
+let editIdx=-1;
+let pendingImgs=[];
+const trophyMap={冠軍:'🥇',亞軍:'🥈',季軍:'🥉',參賽:'🎾',優勝:'🏆'};
+function getTrophy(r){for(const k in trophyMap){if(r&&r.includes(k))return trophyMap[k];}return '🎾';}
+function renderComps(){
+  const list=document.getElementById('compList');
+  if(competitions.length===0){list.innerHTML='<div style="text-align:center;color:#B0826E;font-size:0.85rem;padding:20px 0;">尚無比賽紀錄，點擊下方按鈕新增！</div>';return;}
+  list.innerHTML=competitions.map((c,i)=>`
+    <div class="comp-card">
+      <div class="comp-main">
+        <div class="comp-trophy">${getTrophy(c.result)}</div>
+        <div class="comp-info">
+          <div class="comp-title">${c.title}</div>
+          ${c.meta?`<div class="comp-meta">${c.meta}</div>`:''}
+          ${c.result?`<span class="comp-result">${c.result}</span>`:''}
+          ${c.desc?`<div class="comp-desc">${c.desc}</div>`:''}
+          ${c.imgs&&c.imgs.length?`<div class="comp-photos">${c.imgs.map(src=>`<img class="comp-photo" src="${src}" onclick="openLightbox('${src}')">`).join('')}</div>`:''}
+        </div>
+        <div class="comp-actions">
+          <button class="comp-edit-btn" onclick="openEditModal(${i})">✏️ 編輯</button>
+          <button class="comp-del-btn" onclick="deleteComp(${i})">🗑️</button>
+        </div>
+      </div>
+    </div>`).join('');
+}
+function openAddModal(){editIdx=-1;pendingImgs=[];clearModal();showModal();}
+function openEditModal(i){editIdx=i;const c=competitions[i];pendingImgs=c.imgs?[...c.imgs]:[];document.getElementById('compTitleInput').value=c.title||'';document.getElementById('compMetaInput').value=c.meta||'';document.getElementById('compResultInput').value=c.result||'';document.getElementById('compDescInput').value=c.desc||'';renderImgPreview();showModal();}
+function clearModal(){document.getElementById('compTitleInput').value='';document.getElementById('compMetaInput').value='';document.getElementById('compResultInput').value='';document.getElementById('compDescInput').value='';renderImgPreview();}
+function showModal(){const m=document.getElementById('compModal');m.style.display='flex';}
+function closeModal(){document.getElementById('compModal').style.display='none';}
+function saveComp(){
+  const title=document.getElementById('compTitleInput').value.trim();
+  if(!title){alert('請填寫比賽名稱');return;}
+  const obj={title,meta:document.getElementById('compMetaInput').value.trim(),result:document.getElementById('compResultInput').value.trim(),desc:document.getElementById('compDescInput').value.trim(),imgs:[...pendingImgs]};
+  if(editIdx>=0){competitions[editIdx]=obj;}else{competitions.unshift(obj);}
+  closeModal();renderComps();
+}
+function deleteComp(i){if(confirm('確定刪除此筆紀錄？')){competitions.splice(i,1);renderComps();}}
+function renderImgPreview(){
+  const p=document.getElementById('compImgPreview');
+  p.innerHTML=pendingImgs.map((src,i)=>`<div style="position:relative;"><img src="${src}" style="width:70px;height:55px;object-fit:cover;border-radius:8px;border:1.5px solid #FFB6C1;"><span onclick="removePendingImg(${i})" style="position:absolute;top:-5px;right:-5px;background:#D87093;color:white;border-radius:50%;width:18px;height:18px;font-size:11px;display:flex;align-items:center;justify-content:center;cursor:pointer;">✕</span></div>`).join('');
+}
+function removePendingImg(i){pendingImgs.splice(i,1);renderImgPreview();}
+document.getElementById('compImgInput').addEventListener('change',function(){
+  Array.from(this.files).forEach(file=>{const r=new FileReader();r.onload=e=>{pendingImgs.push(e.target.result);renderImgPreview();};r.readAsDataURL(file);});
+  this.value='';
+});
+function openLightbox(src){const lb=document.getElementById('lightbox');document.getElementById('lbImg').src=src;lb.style.display='flex';}
+renderComps();
+</script>
+
+<!-- 比賽紀錄 Modal -->
+<div id="compModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.45);z-index:500;align-items:center;justify-content:center;">
+  <div style="background:#fff;border-radius:20px;padding:28px 24px;width:90%;max-width:480px;max-height:88vh;overflow-y:auto;">
+    <div style="font-family:'Zeyada',cursive;font-size:1.8rem;color:#D87093;margin-bottom:16px;">比賽紀錄</div>
+    <input id="compTitleInput" placeholder="比賽名稱（必填）" style="width:100%;padding:10px 14px;border-radius:10px;border:1.5px solid #FFB6C1;font-size:0.9rem;margin-bottom:10px;font-family:inherit;color:#5D4037;outline:none;box-sizing:border-box;">
+    <input id="compMetaInput" placeholder="日期・地點・組別（如：2024/11・台中・女子雙打）" style="width:100%;padding:10px 14px;border-radius:10px;border:1.5px solid #FFB6C1;font-size:0.9rem;margin-bottom:10px;font-family:inherit;color:#5D4037;outline:none;box-sizing:border-box;">
+    <input id="compResultInput" placeholder="成績／名次（如：冠軍、季軍）" style="width:100%;padding:10px 14px;border-radius:10px;border:1.5px solid #FFB6C1;font-size:0.9rem;margin-bottom:10px;font-family:inherit;color:#5D4037;outline:none;box-sizing:border-box;">
+    <textarea id="compDescInput" placeholder="備註（選填）" rows="2" style="width:100%;padding:10px 14px;border-radius:10px;border:1.5px solid #FFB6C1;font-size:0.9rem;margin-bottom:12px;font-family:inherit;color:#5D4037;outline:none;resize:vertical;box-sizing:border-box;"></textarea>
+    <div id="compImgPreview" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px;"></div>
+    <div onclick="document.getElementById('compImgInput').click()" style="border:2px dashed #FFB6C1;border-radius:12px;padding:14px;text-align:center;font-size:0.82rem;color:#7A5548;cursor:pointer;margin-bottom:16px;background:#FFF8F9;">📷 點擊上傳比賽照片（可多張）</div>
+    <input type="file" id="compImgInput" accept="image/*" multiple style="display:none;">
+    <div style="display:flex;gap:10px;justify-content:flex-end;">
+      <button onclick="closeModal()" style="padding:9px 20px;border-radius:10px;border:1.5px solid #FFB6C1;background:#fff;color:#D87093;font-size:0.88rem;cursor:pointer;font-family:inherit;">取消</button>
+      <button onclick="saveComp()" style="padding:9px 22px;border-radius:10px;border:none;background:linear-gradient(135deg,#D87093,#FFB6C1);color:#fff;font-size:0.88rem;cursor:pointer;font-family:inherit;font-weight:500;">儲存</button>
+    </div>
+  </div>
+</div>
+<!-- Lightbox -->
+<div id="lightbox" onclick="this.style.display='none'"><img id="lbImg" src=""></div>
+</body>
+</html>
