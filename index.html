@@ -49,6 +49,105 @@ body{font-family:'Noto Sans TC',sans-serif;background:radial-gradient(circle at 
 .portfolio-title-like{display:flex;align-items:center;gap:14px;color:var(--pink);font-size:1.75rem;font-weight:900;letter-spacing:.08em;margin-bottom:16px}
 .portfolio-title-like::before{content:'★';font-size:1.6rem}
 .portfolio-title-like::after{content:'';height:2px;background:var(--pink);flex:1;opacity:.7}
+.hero-avatar{
+  display:none!important;
+}
+
+.hero{
+  grid-template-columns:1fr!important;
+  overflow:hidden;
+}
+
+.hero-info{
+  position:relative;
+  z-index:2;
+}
+
+.hero h1{
+  position:relative;
+  display:inline-block;
+}
+
+.hero h1::after{
+  content:'';
+  position:absolute;
+  width:74px;
+  height:74px;
+  right:-92px;
+  top:8px;
+  border-radius:50%;
+  background:
+    radial-gradient(circle at 28% 24%,#fff 0 8%,#FFE66D 9% 28%,#FFC928 29% 100%);
+  box-shadow:
+    inset -6px -9px 12px rgba(205,130,0,.18),
+    0 10px 20px rgba(255,190,30,.35);
+  animation:pickleShot 1.4s cubic-bezier(.18,.85,.22,1) both;
+}
+
+.hero h1::before{
+  content:'';
+  position:absolute;
+  width:190px;
+  height:38px;
+  right:-72px;
+  top:25px;
+  border-radius:999px;
+  background:linear-gradient(100deg,rgba(255,210,80,.0),rgba(255,177,70,.55),rgba(244,91,138,.18),rgba(255,255,255,0));
+  filter:blur(.2px);
+  transform:rotate(-12deg);
+  animation:trailShot 1.4s cubic-bezier(.18,.85,.22,1) both;
+  pointer-events:none;
+}
+
+@keyframes pickleShot{
+  0%{
+    transform:translate(720px,-230px) scale(1.35) rotate(0deg);
+    opacity:0;
+  }
+  12%{
+    opacity:1;
+  }
+  72%{
+    transform:translate(12px,-4px) scale(1.05) rotate(-520deg);
+    opacity:1;
+  }
+  100%{
+    transform:translate(0,0) scale(1) rotate(-620deg);
+    opacity:1;
+  }
+}
+
+@keyframes trailShot{
+  0%{
+    transform:translate(680px,-220px) rotate(-12deg) scaleX(1.5);
+    opacity:0;
+  }
+  12%{
+    opacity:.9;
+  }
+  78%{
+    opacity:.55;
+  }
+  100%{
+    transform:translate(0,0) rotate(-12deg) scaleX(1);
+    opacity:0;
+  }
+}
+
+@media(max-width:900px){
+  .hero h1::after{
+    width:52px;
+    height:52px;
+    right:-60px;
+    top:0;
+  }
+
+  .hero h1::before{
+    width:130px;
+    right:-50px;
+    top:14px;
+  }
+}
 </style>
 </head>
 <body>
@@ -59,7 +158,7 @@ body{font-family:'Noto Sans TC',sans-serif;background:radial-gradient(circle at 
     <div>
       <h1>詹宜真</h1>
       <div class="hero-role">球敘小編 ｜ 網頁設計 ｜ AI 應用創作</div>
-      <p class="hero-desc">熱愛匹克球與網頁設計，擅長內容經營、作品整理、網站頁面規劃，打造有溫度且具實用性的數位履歷。</p>
+      <p class="hero-desc">熱愛匹克球與網頁設計，擅長內容經營、作品整理、網站頁面規劃</p>
       <div class="tags"><span class="tag tg">✅ 求職中</span><span class="tag tb">📍 台中市</span><span class="tag tp">11~12年工作歷程</span></div>
     </div>
   </section>
@@ -96,18 +195,18 @@ body{font-family:'Noto Sans TC',sans-serif;background:radial-gradient(circle at 
     </div>
 
     <div class="portfolio-item">
-      <img class="portfolio-media" src="https://lh3.googleusercontent.com/d/17F2YuyrCk_-szF3lcur-E1Eb1ykKOOCF" alt="練球過程側拍">
-      <div class="portfolio-info">
-        <div class="portfolio-title">練球過程側拍</div>
-        <div class="portfolio-desc">捕捉教練指導、球友練習與分組互動，保留活動過程素材。</div>
-      </div>
-    </div>
+  <img class="portfolio-media" src="https://lh3.googleusercontent.com/d/14eXfrhIMPavrl9PG256jO0kDM4VCX1Ct" alt="練球過程側拍">
+  <div class="portfolio-info">
+    <div class="portfolio-title">練球過程側拍</div>
+    <div class="portfolio-desc">捕捉教練指導、球友練習與分組互動，保留活動過程素材。</div>
+  </div>
+</div>
 
     <div class="portfolio-item">
       <img class="portfolio-media" src="https://lh3.googleusercontent.com/d/1hCqdOI1T7iMPUdLN_m8pHJMwBo_7e0dk" alt="社群素材整理">
       <div class="portfolio-info">
         <div class="portfolio-title">社群素材整理</div>
-        <div class="portfolio-desc">將活動照片分類、挑選可用畫面，協助貼文、限動與活動宣傳使用。</div>
+        <div class="portfolio-desc">將活動照片分類、挑選可用畫面，協助活動宣傳使用。</div>
       </div>
     </div>
 
