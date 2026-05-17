@@ -69,7 +69,7 @@ body{font-family:'Noto Sans TC',sans-serif;background:radial-gradient(circle at 
 }
 
 .hero h1::after{
-  content:'';
+  content:'';f
   position:absolute;
   width:74px;
   height:74px;
@@ -101,19 +101,92 @@ body{font-family:'Noto Sans TC',sans-serif;background:radial-gradient(circle at 
 
 @keyframes pickleShot{
   0%{
-    transform:translate(720px,-230px) scale(1.35) rotate(0deg);
+    transform:translate(260px,40px) scale(5.2) rotate(0deg);
+    opacity:0;
+    filter:blur(10px);
+  }
+
+  10%{
+    opacity:1;
+    filter:blur(3px);
+  }
+
+  38%{
+    transform:translate(120px,18px) scale(3.1) rotate(-240deg);
+    opacity:1;
+    filter:blur(1px);
+  }
+
+  72%{
+    transform:translate(26px,2px) scale(1.35) rotate(-520deg);
+    opacity:1;
+    filter:blur(0);
+  }
+
+  100%{
+    transform:translate(0,0) scale(1) rotate(-680deg);
+    opacity:1;
+    filter:blur(0);
+  }
+}
+.hero h1::after{
+  transform-origin:center center;
+  box-shadow:
+    inset -8px -10px 14px rgba(205,130,0,.25),
+    0 16px 30px rgba(255,190,30,.45),
+    0 0 0 12px rgba(255,218,80,.12)!important;
+}
+
+.hero h1::before{
+  width:260px!important;
+  height:54px!important;
+  opacity:.9;
+  filter:blur(4px)!important;
+}
+
+@keyframes trailShot{
+  0%{
+    transform:translate(230px,42px) rotate(-12deg) scaleX(2.2);
     opacity:0;
   }
+
   12%{
-    opacity:1;
+    opacity:.95;
   }
-  72%{
-    transform:translate(12px,-4px) scale(1.05) rotate(-520deg);
-    opacity:1;
+
+  55%{
+    opacity:.6;
   }
+
   100%{
-    transform:translate(0,0) scale(1) rotate(-620deg);
-    opacity:1;
+    transform:translate(0,0) rotate(-12deg) scaleX(.8);
+    opacity:0;
+  }
+}
+@media(max-width:900px){
+  @keyframes pickleShot{
+    0%{
+      transform:translate(110px,28px) scale(3.4) rotate(0deg);
+      opacity:0;
+      filter:blur(8px);
+    }
+
+    12%{
+      opacity:1;
+      filter:blur(2px);
+    }
+
+    65%{
+      transform:translate(18px,4px) scale(1.35) rotate(-420deg);
+      opacity:1;
+      filter:blur(0);
+    }
+
+    100%{
+      transform:translate(0,0) scale(1) rotate(-560deg);
+      opacity:1;
+      filter:blur(0);
+    }
   }
 }
 
