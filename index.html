@@ -347,6 +347,41 @@ body{font-family:'Noto Sans TC',sans-serif;background:radial-gradient(circle at 
     line-height:1.5!important;
   }
 }
+
+.pickle-icon{
+  display:block!important;
+  width:36px!important;
+  height:36px!important;
+  min-width:36px!important;
+  min-height:36px!important;
+  margin:0 auto 8px!important;
+  border-radius:50%!important;
+  background:radial-gradient(circle at 28% 24%,#fff 0 8%,#FFE66D 9% 28%,#FFC928 29% 100%)!important;
+  box-shadow:inset -4px -6px 8px rgba(205,130,0,.18),0 6px 12px rgba(255,190,30,.28)!important;
+  position:relative!important;
+}
+
+.pickle-icon::before{
+  content:''!important;
+  position:absolute!important;
+  width:5px!important;
+  height:5px!important;
+  left:10px!important;
+  top:10px!important;
+  background:#F5A400!important;
+  border-radius:50%!important;
+}
+
+.pickle-icon::after{
+  content:''!important;
+  position:absolute!important;
+  width:5px!important;
+  height:5px!important;
+  right:9px!important;
+  bottom:10px!important;
+  background:#F5A400!important;
+  border-radius:50%!important;
+}
 </style>
 </head>
 <body>
@@ -377,7 +412,7 @@ body{font-family:'Noto Sans TC',sans-serif;background:radial-gradient(circle at 
       <div class="two-col">
         <section class="section" data-sec="skills"><div class="sec-title">作品連結</div><div class="sg">
   <div class="sk" style="cursor:pointer;" onclick="window.open('https://pickleball.pack8ai.com/')">
-    <div class="si pickle-icon"></div>
+    <div class="pickle-icon"></div>
     <div class="sn-link">匹克球網站 ↗</div>
   </div>
 
