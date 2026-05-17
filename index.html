@@ -418,7 +418,7 @@ body{font-family:'Noto Sans TC',sans-serif;background:radial-gradient(circle at 
 </div>
 <button class="top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 <script>
-const msgs={hero:'嗨！我是詹宜真，歡迎來看我的履歷！🎾',contact:'想聯絡我嗎？這裡都找得到我喔！📞',work:'這是我一路走來的工作歷程，很豐富吧？💪',skills:'這些技能都是我一點一滴學來的！✨',edu:'認真念書的青春歲月...懷念啊！📚',portfolio:'這裡是我的作品集，歡迎欣賞！🎨',intro:'熱愛，是最好的工作動力 ♥'};
+const msgs={hero:'嗨！我是詹宜真，歡迎來看我的履歷！',contact:'想聯絡我嗎？這裡都找得到我喔！📞',work:'這是我一路走來的工作歷程，很豐富吧？💪',skills:'這些技能都是我一點一滴學來的！✨',edu:'認真念書的青春歲月...懷念啊！📚',portfolio:'這裡是我的作品集，歡迎欣賞！🎨',intro:'熱愛，是最好的工作動力 ♥'};
 const bubble=document.getElementById('bubble');let cur='';function show(m){bubble.textContent=m;}
 const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){const s=x.target.getAttribute('data-sec');if(s&&s!==cur){cur=s;show(msgs[s]);}}});},{threshold:0.25});
 document.querySelectorAll('[data-sec]').forEach(el=>obs.observe(el));
