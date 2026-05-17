@@ -320,6 +320,33 @@ body{font-family:'Noto Sans TC',sans-serif;background:radial-gradient(circle at 
     top:16px!important;
   }
 }
+@media(max-width:900px){
+  .sidebar{
+    position:fixed!important;
+    left:10px!important;
+    bottom:16px!important;
+    top:auto!important;
+    z-index:9999!important;
+    min-height:auto!important;
+    flex-direction:column!important;
+    align-items:flex-start!important;
+    justify-content:flex-end!important;
+    gap:6px!important;
+    pointer-events:none!important;
+  }
+
+  .side-avatar{
+    width:74px!important;
+    flex-shrink:0!important;
+  }
+
+  .bubble{
+    max-width:150px!important;
+    font-size:.72rem!important;
+    padding:9px 11px!important;
+    line-height:1.5!important;
+  }
+}
 </style>
 </head>
 <body>
