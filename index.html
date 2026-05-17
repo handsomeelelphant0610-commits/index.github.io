@@ -455,6 +455,94 @@ body{font-family:'Noto Sans TC',sans-serif;background:radial-gradient(circle at 
   background:#F5A400!important;
   border-radius:50%!important;
 }
+@media(max-width:900px){
+
+  .hero{
+    overflow:hidden!important;
+  }
+
+  .hero h1{
+    position:relative!important;
+    display:inline-block!important;
+    overflow:visible!important;
+  }
+
+  .hero h1::after{
+    content:''!important;
+    position:absolute!important;
+    width:56px!important;
+    height:56px!important;
+    right:-54px!important;
+    top:2px!important;
+    border-radius:50%!important;
+    background:radial-gradient(circle at 28% 24%,#fff 0 8%,#FFE66D 9% 28%,#FFC928 29% 100%)!important;
+    box-shadow:
+      inset -8px -10px 14px rgba(205,130,0,.25),
+      0 16px 30px rgba(255,190,30,.45),
+      0 0 0 10px rgba(255,218,80,.12)!important;
+    animation:mobilePickleShot 1.45s cubic-bezier(.18,.85,.22,1) both!important;
+    z-index:5!important;
+  }
+
+  .hero h1::before{
+    content:''!important;
+    position:absolute!important;
+    width:150px!important;
+    height:42px!important;
+    right:-50px!important;
+    top:16px!important;
+    border-radius:999px!important;
+    background:linear-gradient(100deg,rgba(255,210,80,0),rgba(255,177,70,.55),rgba(244,91,138,.18),rgba(255,255,255,0))!important;
+    filter:blur(4px)!important;
+    animation:mobileTrailShot 1.45s cubic-bezier(.18,.85,.22,1) both!important;
+    pointer-events:none!important;
+    z-index:4!important;
+  }
+
+  @keyframes mobilePickleShot{
+    0%{
+      transform:translate(55px,18px) scale(6) rotate(0deg);
+      opacity:0;
+      filter:blur(10px);
+    }
+    12%{
+      opacity:1;
+      filter:blur(4px);
+    }
+    42%{
+      transform:translate(34px,10px) scale(3.2) rotate(-240deg);
+      opacity:1;
+      filter:blur(1px);
+    }
+    76%{
+      transform:translate(8px,2px) scale(1.4) rotate(-500deg);
+      opacity:1;
+      filter:blur(0);
+    }
+    100%{
+      transform:translate(0,0) scale(1) rotate(-650deg);
+      opacity:1;
+      filter:blur(0);
+    }
+  }
+
+  @keyframes mobileTrailShot{
+    0%{
+      transform:translate(60px,20px) rotate(-12deg) scaleX(2.2);
+      opacity:0;
+    }
+    12%{
+      opacity:.9;
+    }
+    60%{
+      opacity:.55;
+    }
+    100%{
+      transform:translate(0,0) rotate(-12deg) scaleX(.8);
+      opacity:0;
+    }
+  }
+}
 </style>
 </head>
 <body>
