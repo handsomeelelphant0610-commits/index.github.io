@@ -648,6 +648,125 @@ body{font-family:'Noto Sans TC',sans-serif;background:radial-gradient(circle at 
     }
   }
 }
+  @media(max-width:900px){
+
+  .hero{
+    overflow:visible!important;
+    position:relative!important;
+    z-index:5!important;
+  }
+
+  .hero-info{
+    position:relative!important;
+    z-index:10!important;
+    overflow:visible!important;
+  }
+
+  .hero h1{
+    position:relative!important;
+    display:inline-block!important;
+    overflow:visible!important;
+    z-index:20!important;
+  }
+
+  .hero h1::after{
+    content:''!important;
+    position:absolute!important;
+    width:56px!important;
+    height:56px!important;
+    right:-54px!important;
+    top:2px!important;
+    border-radius:50%!important;
+    background:radial-gradient(circle at 28% 24%,#fff 0 8%,#FFE66D 9% 28%,#FFC928 29% 100%)!important;
+    box-shadow:
+      inset -8px -10px 14px rgba(205,130,0,.25),
+      0 18px 36px rgba(255,190,30,.5),
+      0 0 0 14px rgba(255,218,80,.14)!important;
+    animation:mobilePickleCenterToName 1.85s cubic-bezier(.16,.84,.26,1) both!important;
+    transform-origin:center center!important;
+    will-change:transform,opacity,filter!important;
+    z-index:999!important;
+    pointer-events:none!important;
+  }
+
+  .hero h1::before{
+    content:''!important;
+    position:absolute!important;
+    width:180px!important;
+    height:46px!important;
+    right:-58px!important;
+    top:18px!important;
+    border-radius:999px!important;
+    background:linear-gradient(100deg,rgba(255,210,80,0),rgba(255,177,70,.5),rgba(244,91,138,.2),rgba(255,255,255,0))!important;
+    filter:blur(5px)!important;
+    animation:mobileTrailCenterToName 1.85s cubic-bezier(.16,.84,.26,1) both!important;
+    will-change:transform,opacity!important;
+    z-index:998!important;
+    pointer-events:none!important;
+  }
+
+  @keyframes mobilePickleCenterToName{
+    0%{
+      transform:translate(-70px,62px) scale(7.2) rotate(0deg);
+      opacity:0;
+      filter:blur(12px);
+    }
+
+    8%{
+      opacity:1;
+      filter:blur(7px);
+    }
+
+    30%{
+      transform:translate(-48px,42px) scale(4.4) rotate(-220deg);
+      opacity:1;
+      filter:blur(3px);
+    }
+
+    58%{
+      transform:translate(-20px,20px) scale(2.25) rotate(-430deg);
+      opacity:1;
+      filter:blur(1px);
+    }
+
+    82%{
+      transform:translate(-4px,6px) scale(1.18) rotate(-610deg);
+      opacity:1;
+      filter:blur(0);
+    }
+
+    100%{
+      transform:translate(0,0) scale(1) rotate(-700deg);
+      opacity:1;
+      filter:blur(0);
+    }
+  }
+
+  @keyframes mobileTrailCenterToName{
+    0%{
+      transform:translate(-84px,58px) rotate(-14deg) scaleX(2.7);
+      opacity:0;
+    }
+
+    12%{
+      opacity:.9;
+    }
+
+    46%{
+      transform:translate(-44px,34px) rotate(-14deg) scaleX(1.9);
+      opacity:.65;
+    }
+
+    72%{
+      opacity:.35;
+    }
+
+    100%{
+      transform:translate(0,0) rotate(-14deg) scaleX(.7);
+      opacity:0;
+    }
+  }
+}
 </style>
 </head>
 <body>
